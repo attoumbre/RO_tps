@@ -26,14 +26,9 @@ def set_model_name(adm_cells, row_limits, col_limits):
     # The variables
     # ------------------------------------------------------------------------ #
     # TODO: set variables
-    #Selon element recuperé sous forme de couple [(x1,x2), (x3,x4)...] seulement les admissibles
-    #variable=[(row_i,col_j) 
-     #for row_i in range(len(row_limits))
-     #for col_j in range(len(col_limits)) 
-     #if((row_i,col_j) in adm_cells)
-    #]
+    
     variable_names = [str(i)+str(j) for j in range(len(col_limits))
-     for i in range( len(row_limits)) if((i,j) in adm_cells)]
+     for i in range( len(row_limits))]
     variable_names.sort()
     print("Variable Indices:", variable_names)
 
@@ -44,26 +39,33 @@ def set_model_name(adm_cells, row_limits, col_limits):
     # The objective function
     # ------------------------------------------------------------------------ #
     # TODO: write the objective function
-    obj_func = lpSum(allocation)
+    #obj_func = lpSum(allocation)
+    #print(obj_func)
+    #prob +=  obj_func
+    #print(prob)
+    obj_func=0
+    for i in range(len(row_limits)):
+        for j in range(len(col_limits)):
+            if (i, j) in adm_cells:
+                obj_func += lpSum(allocation[i][j])
     print(obj_func)
-    prob +=  obj_func
+    prob += obj_func
     print(prob)
-   
     # ------------------------------------------------------------------------ #
     # The constraints
     # ------------------------------------------------------------------------ #
     # TODO: write constraints
     for i in range(len(row_limits)):
         print(lpSum(allocation[i][j] 
-        for j in range(len(col_limits))) <= row_limits[i])
+        for j in range(len(col_limits))if (i,j) in adm_cells) <= row_limits[i])
         prob += lpSum(allocation[i][j] 
-        for j in range(len(col_limits))) <= row_limits[i] , "rows Constraints " + str(i)
+        for j in range(len(col_limits))if (i,j) in adm_cells) <= row_limits[i] , "rows Constraints " + str(i)
     
     for j in range(len(col_limits)):
         print(lpSum(allocation[i][j] 
-        for i in range(len(row_limits))) >= col_limits[j])
+        for i in range(len(row_limits))if (i,j) in adm_cells) >= col_limits[j])
         prob += lpSum(allocation[i][j] 
-        for i in range(len(row_limits))) >= col_limits[j] , "Demand Constraints " + str(j)
+        for i in range(len(row_limits))if (i,j) in adm_cells) >= col_limits[j] , "Demand Constraints " + str(j)
         
    
     #je veux ecrire sum des j allant jusqu a n des xij <= a li

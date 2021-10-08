@@ -8,7 +8,7 @@ variable = [LpVariable(f'x_{i}{j}', lowBound=0)
      if((i,j) in a)
 ]
 c=[i for i in range(6)]
-r=[i for i in range(6)]
+r=[i for i in range(2)]
 print(c)
 print(variable)
 prob = LpProblem(name='name', sense=LpMaximize)
@@ -23,8 +23,9 @@ for i in range(len(a)):
 
 #print(prob)
 
-assign_vars = LpVariable.dicts("AtLocation",
-[(i, j) for i in LOCATIONS
-for j in PRODUCTS],
- 0, 1, LpBinary)
   
+for i in range(r):
+    print(lpSum(allocation[i][j] for j in range(n_customers)) 
+    <= warehouse_supply[i])
+    model += lpSum(allocation[i][j] for j in range(n_customers))
+     <= warehouse_supply[i] , "Supply Constraints " + str(i))
