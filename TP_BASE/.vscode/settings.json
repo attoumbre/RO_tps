@@ -1,0 +1,26 @@
+{
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "editor.renderIndentGuides": false
+    },
+    "editor.rulers": [
+        80
+    ],
+    "python.defaultInterpreterPath": ".venv_38/bin/python3.8",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportUndefinedVariable": "none"
+    },
+    "python.linting.flake8CategorySeverity.F": "Warning",
+    "python.linting.flake8Args": [
+        "--config=tox.ini"
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--rcfile=tox.ini"
+    ],
+    "python.linting.pylintCategorySeverity.refactor": "Information",
+    "python.linting.pylintUseMinimalCheckers": false,
+}
