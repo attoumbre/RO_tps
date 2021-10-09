@@ -63,9 +63,9 @@ def set_model_name(adm_cells, row_limits, col_limits):
     
     for j in range(len(col_limits)):
         print(lpSum(allocation[i][j] 
-        for i in range(len(row_limits))if (i,j) in adm_cells) >= col_limits[j])
+        for i in range(len(row_limits))if (i,j) in adm_cells) <= col_limits[j])
         prob += lpSum(allocation[i][j] 
-        for i in range(len(row_limits))if (i,j) in adm_cells) >= col_limits[j] , "Demand Constraints " + str(j)
+        for i in range(len(row_limits))if (i,j) in adm_cells) <= col_limits[j] , "Demand Constraints " + str(j)
         
    
     #je veux ecrire sum des j allant jusqu a n des xij <= a li
